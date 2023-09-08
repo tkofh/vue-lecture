@@ -1,0 +1,13 @@
+{
+  "name": "vue-intro-lecture",
+  "private": true,
+  "scripts": {
+    "build": "slidev build",
+    "dev": "slidev --open",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@slidev/cli": "^0.43.0-beta.7",
+    "slidev-theme-vuetiful": "^0.3.1"
+  }
+}
