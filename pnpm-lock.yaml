@@ -12,6 +12,11 @@ dependencies:
     specifier: ^0.3.1
     version: 0.3.1(@slidev/cli@0.43.0-beta.7)(vue@3.3.4)
 
+devDependencies:
+  '@iconify-json/ri':
+    specifier: ^1.1.12
+    version: 1.1.12
+
 packages:
 
   /@ampproject/remapping@2.2.1:
@@ -555,9 +560,14 @@ packages:
       '@iconify/types': 2.0.0
     dev: false
 
+  /@iconify-json/ri@1.1.12:
+    resolution: {integrity: sha512-s5VsyMWYuUuTB5bATJRoDQKGqo6W0dsxvOBrJI/P2H9QI7IAaAWl8zHxseSjoUGG6AwZwWwDMW9YPULPt+vA6w==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
   /@iconify/types@2.0.0:
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
-    dev: false
 
   /@iconify/utils@2.1.9:
     resolution: {integrity: sha512-mo+A4n3MwLlWlg1SoSO+Dt6pOPWKElk9sSJ6ZpuzbB9OcjxN8RUWxU3ulPwB1nglErWKRam2x4BAohbYF7FiFA==}
