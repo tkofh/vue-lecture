@@ -115,47 +115,16 @@ image: safari-chrome.png
 ---
 
 ---
+layout: full-image
+image: firefox-edge.png
+---
+
+---
+layout: full-image
+image: brave-arc.png
+---
+
+
+---
 
 # technology: browser engine
-
----
-layout: section
----
-
-# intro to vue
-
----
-layout: big-points
----
-
-- templates & single-file components
-- reactivity
-- forms
-- data fetching
-
----
-
-# templates
-
-```vue {all|1-3|5-7|9-13} {lines:true}
-<template>
-  <h1>Hello World!</h1>
-</template>
-
-<script setup lang="ts">
-console.log("hi");
-</script>
-
-<style scoped>
-h1 {
-  color: rebeccapurple;
-}
-</style>
-```
-
----
-
-layout: iframe
-url: https://stackblitz.com/edit/vitejs-vite-mscofq?embed=1&file=src%2FApp.vue&hideExplorer=1&hideNavigation=1
-
----
