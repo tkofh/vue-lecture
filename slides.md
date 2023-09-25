@@ -63,7 +63,9 @@ layout: section
 ```
 
 ---
-layout: iframe
+layout: stackblitz
+projectId: js-yigmp7
+projectFile: index.html
 url: https://stackblitz.com/edit/js-yigmp7?embed=1&file=index.html
 ---
 
