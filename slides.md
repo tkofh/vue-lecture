@@ -11,7 +11,7 @@ mdc: true
 
 # Front End Web Dev With Vue.js
 
-Tim Morris - UConn CSE 2xxx - 9/26/23
+Tim Morris - UConn CSE 2102 - 9/26/23
 
 ---
 
