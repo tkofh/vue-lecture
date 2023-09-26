@@ -130,9 +130,10 @@ image: browsers-and-engines.png
 - markup language: tags & attributes
 - tags can provide functionality or semantic meaning
 
-[mdn docs](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[mdn docs](https://developer.mozilla.org/en-US/docs/Web/HTML)<br>
+[playground](https://stackblitz.com/edit/web-platform-q8zphy?file=index.html)
 
-```html {all|1|9|2-8|5}
+```html {all|1|9|2-8|5} {maxHeight:'14rem'}
 <header>
   <h1>My Site</h1>
   <nav>
@@ -149,11 +150,6 @@ image: browsers-and-engines.png
   </section>
 </main>
 ```
-
----
-layout: iframe
-url: https://stackblitz.com/edit/web-platform-q8zphy?embed=1&file=index.html
----
 
 ---
 
@@ -198,9 +194,10 @@ url: https://stackblitz.com/edit/web-platform-q8zphy?embed=1&file=index.html
 - "style" of a webpage
 - not well liked (i like it tho)
 
-[mdn docs](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[mdn docs](https://developer.mozilla.org/en-US/docs/Web/CSS)<br>
+[playground](https://stackblitz.com/edit/web-platform-q8cluc?file=index.html)
 
-```css {all|1|2|7|12}
+```css {all|1|2|7|12} {maxHeight: '14rem'}
 header {
   background: blue;
   color: white;
@@ -216,11 +213,6 @@ header a:hover {
   color: red;
 }
 ```
-
----
-layout: iframe
-url: https://stackblitz.com/edit/web-platform-q8cluc?embed=1&file=index.html
----
 
 ---
 
@@ -246,15 +238,15 @@ url: https://stackblitz.com/edit/web-platform-q8cluc?embed=1&file=index.html
 
 # language: javascript
 
-- implements ecmascript standard
-- implements tc39 specification
+- implements ecmascript standard & tc39 specification
 - famously created in 17 days (and it shows! jk)
 - no relation to java
 
-[mdn docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[mdn language overview](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_overview)
+[mdn docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript)<br>
+[mdn language overview](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_overview)<br>
+[playground](https://stackblitz.com/edit/web-platform-djkwwe?file=index.html)
 
-```js
+```js {maxHeight: '14rem'}
 let angle = 0;
 
 const pi = 3.1415926535;
@@ -270,18 +262,14 @@ rotate(pi * 0.5);
 ```
 
 ---
-layout: iframe
-url: https://stackblitz.com/edit/web-platform-djkwwe?embed=1&file=index.html
----
-
----
 
 # technology: dom
 
 - document object model
 - enables js modification of the html on screen
 
-[mdn docs](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
+[mdn docs](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)<br>
+[playground](https://stackblitz.com/edit/web-platform-m1cjh1?file=script.js)
 
 ```js
 window.addEventListener('click', () => {
@@ -296,18 +284,14 @@ window.addEventListener('click', () => {
 ```
 
 ---
-layout: iframe
-url: https://stackblitz.com/edit/web-platform-m1cjh1?embed=1&file=script.js
----
-
----
 
 # web api: fetch
 
 - js api for making http requests
 - can interpret json, binary data, anything the browser can interpret
 
-[mdn docs](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+[mdn docs](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)<br>
+[playground](https://stackblitz.com/edit/web-platform-vd4cir?file=script.js)
 
 ```js
 fetch('https://api.quotable.io/random')
@@ -323,11 +307,6 @@ fetch('https://api.quotable.io/random')
     document.body.appendChild(quoteElement);
   });
 ```
-
----
-layout: iframe
-url: https://stackblitz.com/edit/web-platform-vd4cir?embed=1&file=script.js
----
 
 ---
 
@@ -391,7 +370,9 @@ layout: section
 
 - `*.vue` files
 - reusable & composable
+- declare props & slots
 
+[vue docs](https://vuejs.org/guide/introduction.html)<br>
 [playground](https://stackblitz.com/edit/vitejs-vite-y4rosg?file=src%2Fcomponents%2FAppHeader.vue)
 
 ```vue
@@ -742,3 +723,9 @@ layout: section
 
 - `vite build`
 - upload `dist` folder to hosting provider (s3)
+
+---
+layout: section
+---
+
+# thank you!
