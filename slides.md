@@ -172,32 +172,6 @@ url: https://stackblitz.com/edit/web-platform-q8zphy?embed=1&file=index.html
 
 ---
 
-# resource: images
-
-```html
-<img src="/example.png" alt="example alt text" />
-```
-
-- `src` is the path to the image
-- `alt` is the text describing the picture to visually impaired
-
-<div class="h-8"></div>
-
-```html
-<picture>
-  <source srcset="/example-portrait.jpg" media="(orientation: portrait)" />
-  <img src="/example-landscape.jpg" alt="" />
-</picture>
-```
-
-- browser only requests one image, based on environmental conditions
-
-links:
-- [mdn docs for `img`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img)
-- [mdn docs for `picture`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture)
-
----
-
 # resource: stylesheet
 
 - css document that influences how the webpage is rendered
@@ -278,6 +252,7 @@ url: https://stackblitz.com/edit/web-platform-q8cluc?embed=1&file=index.html
 - no relation to java
 
 [mdn docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[mdn language overview](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_overview)
 
 ```js
 let angle = 0;
@@ -296,7 +271,7 @@ rotate(pi * 0.5);
 
 ---
 layout: iframe
-url: https://stackblitz.com/edit/js-hssz58?embed=1&file=index.js
+url: https://stackblitz.com/edit/web-platform-djkwwe?embed=1&file=index.html
 ---
 
 ---
@@ -439,3 +414,331 @@ header {
 }
 </style>
 ```
+
+---
+
+# declarative programming
+
+- define what the result should be based on inputs
+  - do not define the steps to take
+
+```vue
+<template>
+  <p>{{ message }}</p>
+</template>
+
+<script setup>
+const message = 'Hello, world!'
+</script>
+```
+
+---
+
+# control flow
+
+- `v-if` enables conditional rendering
+
+```vue
+<template>
+  <p v-if="showFirstMessage">First Message</p>
+  <p v-else>Second Message</p>
+</template>
+
+<script setup>
+const showFirstMessage = Math.random() > 0.5
+</script>
+```
+
+---
+
+# lifecycle hooks
+
+- component creation
+- `onMounted()`
+- `onBeforeUnmount()`
+
+```vue
+<script setup>
+import { onMounted, onBeforeUnmount } from 'vue'
+
+console.log('I run instantly')
+
+onMounted(() => {
+  console.log('I run as soon as this component has html')
+})
+
+onBeforeUnmount(() => {
+  console.log('I run just before this component loses its html')
+})
+</script>
+```
+
+---
+
+# data binding
+
+- declarative syntax
+- `{{ }}` for text
+- `v-bind` or `:` for data
+
+```vue
+<template>
+  <h1 :id="id">{{ heading }}</h1>
+</template>
+
+<script setup>
+const heading = 'Hello UConn'
+
+const id = heading.toLowerCase().split(' ').join('-') // -> 'hello-uconn'
+</script>
+```
+---
+
+# event handlers
+
+- `v-on:` and `@` syntax
+- captures dom events
+  - can also capture component events
+
+[playground](https://stackblitz.com/edit/vitejs-vite-5ikkvm?file=src%2FApp.vue)
+
+```vue
+<template>
+  <button @click="onButtonClick">Click Me!</button>
+</template>
+
+<script setup>
+const onButtonClick = (event) => {
+  console.log('The button was clicked', event)
+}
+</script>
+```
+
+---
+
+# js primitives
+
+- strings, numbers, booleans are all "primitives"
+- passed by value not reference
+- js objects _are_ passed by reference
+- in order to "reference" a primitive, wrap it in an object
+
+```js
+const two = 2;
+const number = two;
+
+const twoObj = { value: 2 };
+const numberObj = twoObj;
+```
+
+---
+
+# reactivity: ref
+
+- `ref` is an object with a `value` property
+- when its `value` changes, vue knows it may need to update some things
+
+```vue
+<template>
+  <p>the count is {{ count }}</p>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const count = ref(0);
+
+setTimeout(() => {
+  count.value = count.value + 1;
+}, 1000);
+</script>
+```
+
+[playground](https://stackblitz.com/edit/vitejs-vite-5ikkvm?file=src%2FApp.vue)
+
+---
+
+# reactivity: reactive
+
+- sibling api to `ref`, allows properties other than `value`
+
+```js
+import { reactive } from 'vue';
+
+const state = reactive({
+  firstName: 'tim',
+  passion: 'graphic design',
+});
+```
+<div class="h-4"></div>
+
+- difficult to read
+```js
+state.firstName
+```
+
+---
+
+# reactivity: computed
+
+- pure function producing some state based on other reactive values
+- cached, smart
+
+```vue
+<template>
+  <p>{{ fullName }}</p>
+</template>
+
+<script setup>
+import { ref, computed } from 'vue';
+
+const firstName = ref('tim')
+const lastName = ref('morris')
+
+const fullName = computed(() => `${firstName.value} ${lastName.value}`)
+</script>
+```
+
+---
+
+# reactivity: watch
+
+- event listener for data changes
+- can run side effects
+- control over timing
+
+```js
+import { ref, watch } from 'vue';
+
+const count = ref(0);
+
+watch(count, (current, previous) => {
+  console.log(`the current count is: ${current} (was ${previous})`);
+});
+
+// some time later...
+count.value = 5;
+```
+
+---
+
+# putting it all together
+
+- `ref`, `computed`, `watch`, event handlers, and data binding can be combined to create almost any behavior
+- these + browser APIs power most applications
+
+[playground](https://stackblitz.com/edit/vitejs-vite-sg1sjm?file=src%2FApp.vue)
+
+---
+
+# form data binding
+
+- data down, events up
+- `<input />` elements have a `value` attribute (data down)
+- `<input />` elements have an `input` event (events up)
+
+```vue
+<template>
+  <input :value="firstName" @input="event => firstName = event.target.value" />
+</template>
+
+<script setup>
+import { ref } from 'vue';
+const firstName = ref('');
+</script>
+```
+
+---
+
+# form data binding
+
+- this is so common it gets its own shorthand: `v-model`
+
+```vue
+<template>
+  <input v-model="firstName" />
+</template>
+
+<script setup>
+import { ref } from 'vue';
+const firstName = ref('');
+</script>
+```
+
+[playground](https://stackblitz.com/edit/vitejs-vite-ukxcgm?file=src%2FApp.vue)
+
+---
+
+# favor platform apis
+
+if the platform offers an api for something, do not implement it yourself
+
+don't do this:
+```vue
+<template>
+  <form>
+    <label>First Name <input v-model="firstName" />
+    <button type="button" @click="onFormSubmit">Submit</form>
+  </form>
+</template>
+```
+
+do this:
+```vue
+<template>
+  <form @submit.prevent="onFormSubmit">
+    <label>First Name <input v-model="firstName" />
+    <button type="submit">Submit</form>
+  </form>
+</template>
+```
+
+---
+
+# fetch + vue
+
+[playground](https://stackblitz.com/edit/vitejs-vite-8ejmze?file=src%2FApp.vue)
+
+```vue {all|4,18|11-16|2,9,12|13|3,9,14|all}
+<template>
+  <p v-if="isLoading">Loading...</p>
+  <p v-else>{{ quote }}</p>
+  <button @click="loadQuote">Load Quote</button>
+</template>
+
+<script setup>
+const quote = ref(null)
+const isLoading = computed(() => quote.value === null)
+
+function loadQuote() {
+  quote.value = null
+  fetch('https://api.quotable.io/random').then((res) => res.json()).then((data) => {
+    quote.value = data.content
+  })
+}
+
+onMounted(() => loadQuote())
+</script>
+```
+
+---
+layout: section
+---
+
+# scaling up
+
+---
+
+# routing
+
+- leverages browser's history api to control url bar
+- allows us to conditionally render vue components based on route state
+
+[playground](https://stackblitz.com/edit/vitejs-vite-uvnfvq?file=src%2Fmain.js)
+
+---
+
+# deploying
+
+- `vite build`
+- upload `dist` folder to hosting provider (s3)
