@@ -394,10 +394,7 @@ layout: section
   - humans care about spaces & newlines, the browser does not
 - compiler
 
----
-layout: iframe
-url: https://stackblitz.com/edit/vitejs-vite-zafbgh?embed=1&file=counter.js
----
+[playground](https://stackblitz.com/edit/vitejs-vite-zafbgh?file=main.js)
 
 ---
 layout: section
@@ -420,6 +417,8 @@ layout: section
 - `*.vue` files
 - reusable & composable
 
+[playground](https://stackblitz.com/edit/vitejs-vite-y4rosg?file=src%2Fcomponents%2FAppHeader.vue)
+
 ```vue
 <template>
   <header>
@@ -440,8 +439,3 @@ header {
 }
 </style>
 ```
-
----
-layout: iframe
-url: https://stackblitz.com/edit/vitejs-vite-y4rosg?embed=1&file=src%2Fcomponents%2FAppHeader.vue
----
