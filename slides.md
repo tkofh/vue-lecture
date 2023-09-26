@@ -23,7 +23,7 @@ Tim Morris - UConn CSE 2xxx - 9/26/23
   - html
   - css
   - javascript
-- local tool installation
+- tools & local setup
 
 ---
 
@@ -120,13 +120,7 @@ image: browsers-and-engines.png
   - also tls: transport layer security
 - enables transfer of documents from servers to clients
 
----
-
-# technology: web server
-
-- receives & responds to http requests on a network
-- may serve "static assets" or "dynamic content"
-- flavors: containers, serverless, cdns
+[mdn docs](https://developer.mozilla.org/en-US/docs/Web/HTTP)
 
 ---
 
@@ -135,6 +129,8 @@ image: browsers-and-engines.png
 - "structure & content" of a webpage
 - markup language: tags & attributes
 - tags can provide functionality or semantic meaning
+
+[mdn docs](https://developer.mozilla.org/en-US/docs/Web/HTML)
 
 ```html {all|1|9|2-8|5}
 <header>
@@ -156,7 +152,7 @@ image: browsers-and-engines.png
 
 ---
 layout: iframe
-url: https://stackblitz.com/edit/js-yigmp7?embed=1&file=index.html
+url: https://stackblitz.com/edit/web-platform-q8zphy?embed=1&file=index.html
 ---
 
 ---
@@ -196,6 +192,10 @@ url: https://stackblitz.com/edit/js-yigmp7?embed=1&file=index.html
 
 - browser only requests one image, based on environmental conditions
 
+links:
+- [mdn docs for `img`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img)
+- [mdn docs for `picture`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture)
+
 ---
 
 # resource: stylesheet
@@ -224,6 +224,8 @@ url: https://stackblitz.com/edit/js-yigmp7?embed=1&file=index.html
 - "style" of a webpage
 - not well liked (i like it tho)
 
+[mdn docs](https://developer.mozilla.org/en-US/docs/Web/CSS)
+
 ```css {all|1|2|7|12}
 header {
   background: blue;
@@ -243,7 +245,7 @@ header a:hover {
 
 ---
 layout: iframe
-url: https://stackblitz.com/edit/js-jezfw7?embed=1&file=style.css
+url: https://stackblitz.com/edit/web-platform-q8cluc?embed=1&file=index.html
 ---
 
 ---
@@ -275,6 +277,8 @@ url: https://stackblitz.com/edit/js-jezfw7?embed=1&file=style.css
 - famously created in 17 days (and it shows! jk)
 - no relation to java
 
+[mdn docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+
 ```js
 let angle = 0;
 
@@ -302,6 +306,8 @@ url: https://stackblitz.com/edit/js-hssz58?embed=1&file=index.js
 - document object model
 - enables js modification of the html on screen
 
+[mdn docs](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
+
 ```js
 window.addEventListener('click', () => {
   const messageElement = document.createElement('p');
@@ -316,7 +322,7 @@ window.addEventListener('click', () => {
 
 ---
 layout: iframe
-url: https://stackblitz.com/edit/js-sshg7q?embed=1&file=index.js
+url: https://stackblitz.com/edit/web-platform-m1cjh1?embed=1&file=script.js
 ---
 
 ---
@@ -325,6 +331,8 @@ url: https://stackblitz.com/edit/js-sshg7q?embed=1&file=index.js
 
 - js api for making http requests
 - can interpret json, binary data, anything the browser can interpret
+
+[mdn docs](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 
 ```js
 fetch('https://api.quotable.io/random')
@@ -343,7 +351,7 @@ fetch('https://api.quotable.io/random')
 
 ---
 layout: iframe
-url: https://stackblitz.com/edit/js-h2akx5?embed=1&file=index.js
+url: https://stackblitz.com/edit/web-platform-vd4cir?embed=1&file=script.js
 ---
 
 ---
@@ -355,7 +363,85 @@ url: https://stackblitz.com/edit/js-h2akx5?embed=1&file=index.js
 - what if we loaded one document, with js that fetched new _content_?
 
 ---
+layout: section
+---
+
+# tools & local setup
+
+---
 
 # technology: devtools
 
 <img src="/devtools.png" class="w-full h-[30rem] -mt-6 object-contain" />
+
+---
+
+# technology: node.js
+
+- javascript runtime
+- enables javascript web servers, native apps, etc
+- enables local tooling
+
+[homepage](https://nodejs.org/en)
+
+---
+
+# technology: vite
+
+- local development server
+- bundler
+  - optimizes html, css, js etc to maximize loading performance
+  - humans care about spaces & newlines, the browser does not
+- compiler
+
+---
+layout: iframe
+url: https://stackblitz.com/edit/vitejs-vite-zafbgh?embed=1&file=counter.js
+---
+
+---
+layout: section
+---
+
+# intro to vuejs
+
+---
+
+# background
+
+- separation of concerns: structure, style, behavior
+- components: logical grouping of structure, style & behavior
+- "single page applications"
+
+---
+
+# single file components
+
+- `*.vue` files
+- reusable & composable
+
+```vue
+<template>
+  <header>
+    <h1>My Site</h1>
+    <!-- ... -->
+  </header>
+</template>
+
+<script setup>
+console.log('hello from this component!');
+</script>
+
+<style>
+header {
+  background: blue;
+  color: white;
+  padding: 1rem;
+}
+</style>
+```
+
+---
+layout: iframe
+url: https://stackblitz.com/edit/vitejs-vite-y4rosg?embed=1&file=src%2Fcomponents%2FAppHeader.vue
+---
