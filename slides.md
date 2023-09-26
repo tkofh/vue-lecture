@@ -11,17 +11,24 @@ mdc: true
 
 # Front End Web Dev With Vue.js
 
-Tim Morris - UConn CSE 2xxx - 9/19/23
+Tim Morris - UConn CSE 2xxx - 9/26/23
 
 ---
 
 # Agenda
 
 - speedy intro to web dev
+  - browsers
+  - http
   - html
   - css
   - javascript
-- installation
+- local tool installation
+
+---
+
+# Agenda
+
 - vue basics
   - component syntax
   - reactivity
@@ -38,11 +45,96 @@ layout: section
 
 ---
 
+# technology: web browser
+
+- large app
+- main portal to "the web"
+- built on a "browser engine"
+- features such as
+  - bookmark management
+  - ad tracking interference
+
+---
+layout: full-image
+image: safari-chrome.png
+---
+
+---
+layout: full-image
+image: firefox-edge.png
+---
+
+---
+layout: full-image
+image: brave-arc.png
+---
+
+
+---
+
+# technology: browser engine
+
+- program that "implements the web"
+  - fetching resources
+  - parsing & resources
+  - implements platform apis
+  - renders pages
+  - leverage engine to execute javascript
+- implementation governed by the w3c
+
+---
+layout: full-image
+image: engines-timeline.png
+---
+
+---
+layout: full-image
+image: browsers-and-engines.png
+---
+
+---
+
+# organization: w3c
+
+- world wide web consortium
+- publishes open standards
+- organized into "working groups"
+
+---
+
+# trivia: w3c v "the vendors"
+
+- w3c publishes standards, but vendors implement them
+- no obligation to implement standards
+  - pressure comes from competition
+- sus behavior
+  - apple implements features useful to apple
+  - google barely needs to compete
+
+---
+
+# protocol: http
+
+- hypertext transfer protocol
+- (generally) built upon tcp/ip: transmission control protocol/internet protocol
+  - also tls: transport layer security
+- enables transfer of documents from servers to clients
+
+---
+
+# technology: web server
+
+- receives & responds to http requests on a network
+- may serve "static assets" or "dynamic content"
+- flavors: containers, serverless, cdns
+
+---
+
 # language: **h**yper**t**ext **m**arkup **l**anguage
 
-- v old
-- markup language: tags & attributes
 - "structure & content" of a webpage
+- markup language: tags & attributes
+- tags can provide functionality or semantic meaning
 
 ```html {all|1|9|2-8|5}
 <header>
@@ -63,20 +155,74 @@ layout: section
 ```
 
 ---
-layout: stackblitz
-projectId: js-yigmp7
-projectFile: index.html
+layout: iframe
 url: https://stackblitz.com/edit/js-yigmp7?embed=1&file=index.html
 ---
 
 ---
 
+# sub-resources
+
+- html document might reference other assets ("files")
+- browser engine manages http requests for these assets
+- depending on the way it is requested, engine does different things
+- examples
+  - images
+  - videos / audio files
+  - fonts
+  - 3d models
+  - stylesheets
+  - scripts
+
+---
+
+# resource: images
+
+```html
+<img src="/example.png" alt="example alt text" />
+```
+
+- `src` is the path to the image
+- `alt` is the text describing the picture to visually impaired
+
+<div class="h-8"></div>
+
+```html
+<picture>
+  <source srcset="/example-portrait.jpg" media="(orientation: portrait)" />
+  <img src="/example-landscape.jpg" alt="" />
+</picture>
+```
+
+- browser only requests one image, based on environmental conditions
+
+---
+
+# resource: stylesheet
+
+- css document that influences how the webpage is rendered
+- can also add animation, create 3d layouts, etc
+- referenced via a `<link />` tag or declared inline via `<style>` tags in the `<head>` element:
+
+```html
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="/my-stylesheet.css" />
+
+    <style type="text/css">
+      /* ... */
+    </style>
+  </head>
+</html>
+```
+
+---
+
 # language: **c**ascading **s**tyle **s**heets
 
-- also v old
 - selectors & rules
 - "style" of a webpage
-- not liked
+- not well liked (i like it tho)
 
 ```css {all|1|2|7|12}
 header {
@@ -102,31 +248,114 @@ url: https://stackblitz.com/edit/js-jezfw7?embed=1&file=style.css
 
 ---
 
-# technology: web browser
+# resource: script
 
-- large
-- main (only?) portal to "the web"
-- built on a "browser engine"
-- features such as
-  - bookmark management
-  - ad tracking interference
+- javascript file (or module)
+- adds functionality to a webpage
+- used to be optional, now required
+- included via a `<script>` tag
 
----
-layout: full-image
-image: safari-chrome.png
----
-
----
-layout: full-image
-image: firefox-edge.png
----
-
----
-layout: full-image
-image: brave-arc.png
----
-
+```html
+<html>
+  <body>
+    <script defer src="/my-script.js"></script>
+    <script>
+      // ...
+    </script>
+  </body>
+</html>
+```
 
 ---
 
-# technology: browser engine
+# language: javascript
+
+- implements ecmascript standard
+- implements tc39 specification
+- famously created in 17 days (and it shows! jk)
+- no relation to java
+
+```js
+let angle = 0;
+
+const pi = 3.1415926535;
+
+function rotate(amount) {
+  angle = (angle + amount) % (pi * 2);
+  if (angle < 0) {
+    angle += pi * 2;
+  }
+}
+
+rotate(pi * 0.5);
+```
+
+---
+layout: iframe
+url: https://stackblitz.com/edit/js-hssz58?embed=1&file=index.js
+---
+
+---
+
+# technology: dom
+
+- document object model
+- enables js modification of the html on screen
+
+```js
+window.addEventListener('click', () => {
+  const messageElement = document.createElement('p');
+
+  messageElement.appendChild(
+    document.createTextNode('Hello World ' + Math.random())
+  );
+
+  document.body.appendChild(messageElement);
+});
+```
+
+---
+layout: iframe
+url: https://stackblitz.com/edit/js-sshg7q?embed=1&file=index.js
+---
+
+---
+
+# web api: fetch
+
+- js api for making http requests
+- can interpret json, binary data, anything the browser can interpret
+
+```js
+fetch('https://api.quotable.io/random')
+  .then((res) => res.json())
+  .then((data) => {
+    console.log(data);
+
+    const quoteElement = document.createElement('p');
+    quoteElement.appendChild(
+      document.createTextNode(`"${data.content}" - ${data.author}`)
+    );
+
+    document.body.appendChild(quoteElement);
+  });
+```
+
+---
+layout: iframe
+url: https://stackblitz.com/edit/js-h2akx5?embed=1&file=index.js
+---
+
+---
+
+# what if...
+
+- navigations between pages send a full html document
+  - browser fetches all resources
+- what if we loaded one document, with js that fetched new _content_?
+
+---
+
+# technology: devtools
+
+<img src="/devtools.png" class="w-full h-[30rem] -mt-6 object-contain" />
